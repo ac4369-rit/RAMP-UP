@@ -1,4 +1,5 @@
 <?php
+//The variables used are created by the controller
 $dir = \App\Translator::instance()->direction();
 ?>
 <!DOCTYPE html>

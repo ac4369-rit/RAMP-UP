@@ -8,13 +8,11 @@ function env(string $key, ?string $default = null): ?string
     return $_ENV[$key] ?? $_SERVER[$key] ?? $default;
 }
 
-/** Escapa texto para HTML. Úsalo en TODO lo que imprimas. */
 function e(?string $s): string
 {
     return htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8');
 }
 
-/** Traducción por clave: t('decisions.count', ['count' => 3]) */
 function t(string $key, array $params = []): string
 {
     return Translator::instance()->trans($key, $params);
