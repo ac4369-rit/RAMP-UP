@@ -26,7 +26,7 @@ session_start();
 $router = new Router();
 
 
-$router->get('/', fn () => header('Location: /decisions', true, 302));
+$router->get('/', fn () => header('Location: /missed', true, 302));
 
 //Understanding the project (Alba's part)
 //$router->get('/decisions', [DecisionController::class, 'index']);
