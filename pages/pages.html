@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAMP-UP - Getting Started with Work</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>RAMP-UP</h1>
+        <p>Getting Started with Work</p>
+    </header>
+
+    <nav>
+        <button onclick="showPage('my-tasks')">My Tasks</button>
+        <button onclick="showPage('starter-task')">Starter Task</button>
+        <button onclick="showPage('task-detail')">Task Detail</button>
+        <button onclick="showPage('handoff')">Handoff</button>
+        <button onclick="showPage('blocked')">Blocked</button>
+        <button onclick="showPage('progress')">My Progress</button>
+        <button onclick="showPage('review')">Submit for Review</button>
+        <button onclick="showPage('feedback')">Review Feedback</button>
+        <button onclick="showPage('deadline')">Deadline</button>
+        <button onclick="showPage('accepted')">Accepted</button>
+    </nav>
+
+    <main>
+
+        <section id="my-tasks" class="page active">
+            <h2>My Tasks</h2>
+            <p>You don't have any tasks assigned yet.</p>
+            <p>Choose a starter task to begin working on the project.</p>
+            <button onclick="showPage('starter-task')">Find a Starter Task</button>
+        </section>
+
+    
+        <section id="starter-task" class="page">
+            <h2>Pick a Starter Task</h2>
+            <p>Choose a task to start contributing to the project.</p>
+
+            <div class="task-card">
+                <h3>Create a Login Page</h3>
+                <p>Design a simple login page for the application.</p>
+                <button onclick="showPage('task-detail')">View Task</button>
+            </div>
+
+            <div class="task-card">
+                <h3>Update the Homepage</h3>
+                <p>Help improve the homepage layout.</p>
+                <button onclick="showPage('task-detail')">View Task</button>
+            </div>
+
+            <div class="task-card">
+                <h3>Fix a Small Bug</h3>
+                <p>Help find and fix a problem in the application.</p>
+                <button onclick="showPage('task-detail')">View Task</button>
+            </div>
+        </section>
+
+        <section id="task-detail" class="page">
+            <h2>Task Details</h2>
+            <h3>Create a Login Page</h3>
+            <p><strong>Description:</strong> Design a simple login page for the application.</p>
+            <p><strong>Status:</strong> Available</p>
+            <p><strong>Priority:</strong> Medium</p>
+            <p><strong>Next step:</strong> Read the project instructions and start designing.</p>
+            <button onclick="showPage('handoff')">View Handoff Information</button>
+            <button onclick="showPage('progress')">Start Working</button>
+        </section>
+
+        <section id="handoff" class="page">
+            <h2>Handoff from Previous Owner</h2>
+            <p>Here is some information from the previous person who worked on this task.</p>
+
+            <div class="task-card">
+                <h3>Previous Work</h3>
+                <p>The basic page structure has already been planned.</p>
+
+                <h3>What You Need to Do</h3>
+                <p>Continue working on the design and check the project requirements.</p>
+
+                <h3>Important Notes</h3>
+                <p>Keep the design simple and consistent with the rest of the application.</p>
+            </div>
+
+            <button onclick="showPage('task-detail')">Back to Task</button>
+        </section>
+
+        <section id="blocked" class="page">
+            <h2>Mark Task as Blocked</h2>
+            <p>Are you having a problem with your task? Explain what is blocking your progress.</p>
+
+            <form id="blocked-form">
+                <label for="block-reason">Reason:</label>
+                <textarea id="block-reason" required></textarea>
+
+                <button type="submit">Submit Blocked Status</button>
+            </form>
+
+            <p id="blocked-message" class="message"></p>
+        </section>
+
+        <section id="progress" class="page">
+            <h2>Update My Progress</h2>
+            <p>Update the current status of your task.</p>
+
+            <form id="progress-form">
+                <label for="task-status">Task Status:</label>
+                <select id="task-status">
+                    <option value="Not Started">Not Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+                <label for="progress-notes">Progress Notes:</label>
+                <textarea id="progress-notes" placeholder="Write a short update..."></textarea>
+
+                <button type="submit">Save Progress</button>
+            </form>
+
+            <p id="progress-message" class="message"></p>
+        </section>
+
+        <section id="review" class="page">
+            <h2>Submit for Review</h2>
+            <p>Before submitting, make sure you have completed your task.</p>
+
+            <form id="review-form">
+                <label for="review-description">What did you complete?</label>
+                <textarea id="review-description" required></textarea>
+
+                <button type="submit">Submit for Review</button>
+            </form>
+
+            <p id="review-message" class="message"></p>
+        </section>
+
+        <section id="feedback" class="page">
+            <h2>Review Feedback</h2>
+            <p>Your task needs some changes before it can be accepted.</p>
+
+            <div class="task-card">
+                <h3>Changes Requested</h3>
+                <p>Please check the spacing and make the buttons more consistent.</p>
+
+                <h3>Next Step</h3>
+                <p>Make the requested changes and submit your task again.</p>
+            </div>
+
+            <button onclick="showPage('progress')">Update My Task</button>
+        </section>
+
+        <!-- Screen 9: Deadline at Risk -->
+        <section id="deadline" class="page">
+            <h2>Deadline at Risk</h2>
+            <p>Your task may not be completed before the deadline.</p>
+
+            <div class="task-card">
+                <h3>What should you do?</h3>
+                <p>Update your progress and contact your team if you need help.</p>
+            </div>
+
+            <button onclick="showPage('blocked')">Report a Problem</button>
+            <button onclick="showPage('progress')">Update Progress</button>
+        </section>
+
+        <section id="accepted" class="page">
+            <h2>First Task Accepted!</h2>
+            <p>Congratulations! Your first task has been accepted.</p>
+            <p>You have successfully completed your first contribution to the project.</p>
+
+            <div class="task-card">
+                <h3>What's Next?</h3>
+                <p>You can choose another task and continue contributing to the team.</p>
+            </div>
+
+            <button onclick="showPage('starter-task')">Choose Another Task</button>
+        </section>
+
+    </main>
+
+    <script src="/assets/script.js"></script>
+</body>
+</html>
