@@ -2,8 +2,8 @@ const CACHE_NAME = "ramp-up-cache";
 
 const FILES_TO_CACHE = [
     "/",
-    "/assets/style.css",
-    "/assets/script.js"
+    "/assets/css/style.css",
+    "/assets/css/script.js"
 ];
 
 self.addEventListener("install", function(event) {
