@@ -1,8 +1,0 @@
-{
-    "name": "RAMP-UP",
-    "short_name": "RAMP-UP",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#f4f6f9",
-    "theme_color": "#234e70"
-}
