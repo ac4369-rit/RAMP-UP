@@ -13,9 +13,9 @@ use Symfony\Component\Translation\Translator as SymfonyTranslator;
 final class Translator
 {
     
-    public const SUPPORTED = ['en', 'hr'];
+    public const SUPPORTED = ['en', 'hr', 'ja'];
     public const DEFAULT   = 'en';
-    public const NAMES     = ['en' => 'English', 'hr' => 'Hrvatski'];
+    public const NAMES     = ['en' => 'English', 'hr' => 'Hrvatski', 'ja' => '日本語'];
 
     private const RESOURCE_DOMAIN = 'messages+intl-icu';
     private const DOMAIN          = 'messages';
