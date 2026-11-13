@@ -2,8 +2,16 @@
 declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/Controllers';
 
-//use App\Controllers\DecisionController;
+use App\Controllers\DecisionController;
+use App\Controllers\MissedController;
+use App\Controllers\StatusController;
+use App\Controllers\GlossaryController;
+use App\Controllers\ResourceController;
+use App\Controllers\SearchController;
+use App\Controllers\QuestionController;
+use App\Controllers\CheckController;
 use App\Router;
 use Dotenv\Dotenv;
 
@@ -29,16 +37,16 @@ $router = new Router();
 $router->get('/', fn () => header('Location: /missed', true, 302));
 
 //Understanding the project (Alba's part)
-//$router->get('/decisions', [DecisionController::class, 'index']);
-// $router->get('/missed',            [MissedController::class,   'index']);   // 01
-// $router->get('/status',            [StatusController::class,   'index']);   // 02
-// $router->get('/decisions/{id}',    [DecisionController::class, 'show']);    // 04
-// $router->get('/glossary',          [GlossaryController::class, 'index']);   // 05
-// $router->get('/resources',         [ResourceController::class, 'index']);   // 06
-// $router->get('/search',            [SearchController::class,   'index']);   // 07
-// $router->get('/ask',               [QuestionController::class, 'create']);  // 08
-// $router->post('/ask',              [QuestionController::class, 'store']);
-// $router->get('/questions/{id}',    [QuestionController::class, 'show']);    // 09
-// $router->get('/check',             [CheckController::class,    'index']);   // 10
+$router->get('/decisions', [DecisionController::class, 'index']);
+$router->get('/missed',            [MissedController::class,   'index']);   // 01
+$router->get('/status',            [StatusController::class,   'index']);   // 02
+$router->get('/decisions/{id}',    [DecisionController::class, 'show']);    // 04
+$router->get('/glossary',          [GlossaryController::class, 'index']);   // 05
+$router->get('/resources',         [ResourceController::class, 'index']);   // 06
+$router->get('/search',            [SearchController::class,   'index']);   // 07
+$router->get('/ask',               [QuestionController::class, 'create']);  // 08
+$router->post('/ask',              [QuestionController::class, 'store']);
+$router->get('/questions/{id}',    [QuestionController::class, 'show']);    // 09
+$router->get('/check',             [CheckController::class,    'index']);   // 10
 
 $router->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
