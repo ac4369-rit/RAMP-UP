@@ -15,7 +15,7 @@
     <li>
       <h2><?= e(t('home.firstTask')) ?></h2>
       <?php if ($task !== null): ?>
-        <p><?= e($task['title']) ?></p>
+        <p><a href="/tasks/<?= (int) $task['id'] ?>"><?= e($task['title']) ?></a></p>
         <?php if ($task['due_date']): ?><small class="meta"><?= e(t('home.due', ['date' => format_date($task['due_date'])])) ?></small><?php endif; ?>
       <?php else: ?>
         <p class="meta"><?= e(t('home.noTask')) ?></p>

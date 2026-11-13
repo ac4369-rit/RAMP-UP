@@ -24,13 +24,15 @@ erDiagram
     project_tools ||--o{ tool_access : "tool_id"
     questions ||--o{ answers : "question_id"
     roles ||--o{ decision_roles : "role"
+    roles ||--o{ decisions : "area"
+    roles |o--o{ change_events : "area"
     roles ||--o{ invitations : "role"
     roles ||--o{ memberships : "role"
     roles ||--o{ questions : "area"
     roles ||--o{ resources : "role"
     tasks ||--o{ task_updates : "task_id"
     users ||--o{ answers : "author_id"
-    users |o--o{ decisions : "decided_by"
+    users |o--o{ decisions : "decided_by_id"
     users ||--o{ decision_reads : "user_id"
     users ||--o{ intro_calls : "newcomer_id"
     users ||--o{ intro_calls : "buddy_id"
@@ -61,21 +63,24 @@ erDiagram
         varchar kind
         varchar title
         text detail
+        varchar area FK
         datetime happened_at
     }
     decisions {
         int id PK
         int project_id FK
         varchar title
+        varchar area FK
         text context
         text consequences
         enum status
         datetime decided_at
-        int decided_by FK
+        int decided_by_id FK
     }
     decision_options {
         int id PK
         int decision_id FK
+        tinyint position
         varchar label
         varchar description
         tinyint chosen
@@ -152,7 +157,7 @@ erDiagram
         text description
         text audience
         text current_status
-        varchar github_repo
+        varchar repo
         varchar quiz_url
         smallint sprint_number
         varchar sprint_name
@@ -205,6 +210,7 @@ erDiagram
         text description
         enum status
         tinyint is_starter
+        enum priority
         int assigned_to FK
         date due_date
         timestamp created_at

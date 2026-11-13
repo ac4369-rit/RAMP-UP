@@ -20,7 +20,7 @@ class HomeController extends Controller
             $project = $st->fetch() ?: null;
 
             $st = $this->pdo()->prepare(
-                "SELECT title, due_date FROM tasks
+                "SELECT id, title, due_date FROM tasks
                   WHERE project_id = :p AND is_starter = TRUE AND status <> 'done'
                     AND (assigned_to = :u OR assigned_to IS NULL)
                   ORDER BY assigned_to IS NULL, due_date

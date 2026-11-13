@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 SET time_zone = '+00:00';
 
 DROP DATABASE IF EXISTS rampup;
@@ -28,7 +29,7 @@ CREATE TABLE projects (
     description       TEXT         NULL,
     audience          TEXT         NULL,
     current_status    TEXT         NULL,
-    github_repo       VARCHAR(150) NULL,
+    repo              VARCHAR(150) NULL,
     quiz_url          VARCHAR(255) NULL,
     sprint_number     SMALLINT UNSIGNED NOT NULL DEFAULT 1,
     sprint_name       VARCHAR(100) NULL,
@@ -162,26 +163,31 @@ CREATE TABLE change_events (
     kind         VARCHAR(30)  NOT NULL,
     title        VARCHAR(150) NOT NULL,
     detail       TEXT         NULL,
+    area         VARCHAR(30)  NULL,
     happened_at  DATETIME     NOT NULL,
-    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+    FOREIGN KEY (area)       REFERENCES roles(code)
 ) ENGINE=InnoDB;
 
 CREATE TABLE decisions (
     id            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     project_id    INT UNSIGNED NOT NULL,
     title         VARCHAR(150) NOT NULL,
+    area          VARCHAR(30)  NOT NULL,
     context       TEXT         NOT NULL,
     consequences  TEXT         NULL,
     status        ENUM('proposed','accepted','superseded') NOT NULL DEFAULT 'accepted',
     decided_at    DATETIME     NOT NULL,
-    decided_by    INT UNSIGNED NULL,
+    decided_by_id INT UNSIGNED NULL,
     FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
-    FOREIGN KEY (decided_by) REFERENCES users(id)    ON DELETE SET NULL
+    FOREIGN KEY (area)          REFERENCES roles(code),
+    FOREIGN KEY (decided_by_id) REFERENCES users(id)    ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE decision_options (
     id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     decision_id  INT UNSIGNED NOT NULL,
+    position     TINYINT UNSIGNED NOT NULL DEFAULT 1,
     label        VARCHAR(150) NOT NULL,
     description  VARCHAR(255) NULL,
     chosen       BOOLEAN      NOT NULL DEFAULT FALSE,
@@ -272,6 +278,7 @@ CREATE TABLE tasks (
     description  TEXT         NULL,
     status       ENUM('todo','in_progress','blocked','review','done') NOT NULL DEFAULT 'todo',
     is_starter   BOOLEAN      NOT NULL DEFAULT FALSE,
+    priority     ENUM('low','medium','high') NOT NULL DEFAULT 'medium',
     assigned_to  INT UNSIGNED NULL,
     due_date     DATE         NULL,
     created_at   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -283,7 +290,7 @@ CREATE TABLE task_updates (
     id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     task_id     INT UNSIGNED NOT NULL,
     user_id     INT UNSIGNED NOT NULL,
-    kind        ENUM('progress','blocked','review','feedback','handoff') NOT NULL,
+    kind        ENUM('progress','blocked','review','feedback','handoff','accepted') NOT NULL,
     body        TEXT         NOT NULL,
     created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,

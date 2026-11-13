@@ -1,20 +1,26 @@
 USE rampup;
 
+SET NAMES utf8mb4;
+
 SET time_zone = '+00:00';
 
 INSERT INTO roles (code) VALUES ('backend'), ('design'), ('frontend'), ('product');
 
 INSERT INTO users (name, email, password_hash, job_title, locale) VALUES
-('Maya Chen',  'maya@rampup.test',  '$2y$10$siU7HbC7r.f2/ssxRGi7SuZY..wTn7DmiXtQ5g/EOOnQgkhXsbFyy', 'Project Lead',       'en'),
-('Leo Park',   'leo@rampup.test',   '$2y$10$siU7HbC7r.f2/ssxRGi7SuZY..wTn7DmiXtQ5g/EOOnQgkhXsbFyy', 'Senior Developer',   'en'),
-('Sam Ellis',  'sam@rampup.test',   '$2y$10$siU7HbC7r.f2/ssxRGi7SuZY..wTn7DmiXtQ5g/EOOnQgkhXsbFyy', 'Frontend Developer', 'en'),
-('Alex Novak', 'alex@rampup.test',  '$2y$10$siU7HbC7r.f2/ssxRGi7SuZY..wTn7DmiXtQ5g/EOOnQgkhXsbFyy', 'UX Designer',        'hr'),
-('Ana Kovač',  'ana@rampup.test',   '$2y$10$siU7HbC7r.f2/ssxRGi7SuZY..wTn7DmiXtQ5g/EOOnQgkhXsbFyy', 'Project Lead',       'hr'),
-('Đuro Šimić', 'duro@rampup.test',  '$2y$10$siU7HbC7r.f2/ssxRGi7SuZY..wTn7DmiXtQ5g/EOOnQgkhXsbFyy', 'Frontend Developer', 'hr'),
-('ليلى حداد',   'layla@rampup.test', '$2y$10$siU7HbC7r.f2/ssxRGi7SuZY..wTn7DmiXtQ5g/EOOnQgkhXsbFyy', 'Backend Developer',  'en'),
-('佐藤 結衣',    'yui@rampup.test',   '$2y$10$siU7HbC7r.f2/ssxRGi7SuZY..wTn7DmiXtQ5g/EOOnQgkhXsbFyy', 'Junior Developer',   'ja');
+('Maya Chen',  'maya@rampup.test',  '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'Project Lead',       'en'),
+('Leo Park',   'leo@rampup.test',   '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'Senior Developer',   'en'),
+('Sam Ellis',  'sam@rampup.test',   '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'Frontend Developer', 'en'),
+('Alex Novak', 'alex@rampup.test',  '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'UX Designer',        'hr'),
+('Ana Kovač',  'ana@rampup.test',   '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'Project Lead',       'hr'),
+('Đuro Šimić', 'duro@rampup.test',  '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'Frontend Developer', 'hr'),
+('ليلى حداد',   'layla@rampup.test', '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'Backend Developer',  'en'),
+('佐藤 結衣',    'yui@rampup.test',   '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'Junior Developer',   'ja'),
 
-INSERT INTO projects (name, description, audience, current_status, github_repo, quiz_url, sprint_number, sprint_name, sprint_goal, sprint_starts_on, sprint_ends_on, created_by) VALUES
+('Nora Petrić', 'new@rampup.test',   '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'Backend Developer',  'hr'),
+
+('Jordan Reyes', 'jordan@rampup.test', '$2y$10$k3/VA48UNgP3PlC8ZdgDDOaH0TL7qdSpcrOejpEIdbptnUxqlG/7C', 'UX Designer',        'en');
+
+INSERT INTO projects (name, description, audience, current_status, repo, quiz_url, sprint_number, sprint_name, sprint_goal, sprint_starts_on, sprint_ends_on, created_by) VALUES
 ('Atlas – Customer Portal',
  'A web portal where customers can see their orders, download invoices and contact support in one place.',
  'Existing customers of a mid-sized online shop and the support team that answers their questions.',
@@ -86,35 +92,35 @@ INSERT INTO milestones (project_id, position, name, status, due_on) VALUES
 (1, 4, 'Support chat',            'upcoming', '2026-12-11'),
 (1, 5, 'Public launch',           'upcoming', '2027-01-31');
 
-INSERT INTO change_events (project_id, kind, title, detail, happened_at) VALUES
-(1, 'decision', 'Invoices will be PDF only',          'HTML invoices were dropped to save time.',            '2026-11-03 10:00:00'),
-(1, 'people',   'Jordan left the team',               'Jordan moved to another project. Alex takes over UX.', '2026-11-03 15:00:00'),
-(1, 'scope',    'Support chat moved to next sprint',  'The invoice page needed more time.',                  '2026-11-05 09:00:00'),
-(1, 'release',  'Order history released to testers', 'First 20 customers can now see their orders.',        '2026-11-07 14:00:00');
+INSERT INTO change_events (project_id, kind, title, detail, area, happened_at) VALUES
+(1, 'decision', 'Invoices will be PDF only',          'HTML invoices were dropped to save time.',            'backend',  '2026-11-03 10:00:00'),
+(1, 'people',   'Jordan left the team',               'Jordan moved to another project. Alex takes over UX.', 'design',   '2026-11-03 15:00:00'),
+(1, 'scope',    'Support chat moved to next sprint',  'The invoice page needed more time.',                  'product',  '2026-11-05 09:00:00'),
+(1, 'release',  'Order history released to testers', 'First 20 customers can now see their orders.',        'frontend', '2026-11-07 14:00:00');
 
-INSERT INTO decisions (project_id, title, context, consequences, decided_at, decided_by) VALUES
-(1, 'Use PHP and MySQL for the backend',
+INSERT INTO decisions (project_id, title, area, context, consequences, decided_at, decided_by_id) VALUES
+(1, 'Use PHP and MySQL for the backend', 'backend',
     'The whole team already knows PHP and MySQL, and the school server supports them.',
     'No new framework to learn. We use Composer for the few libraries we need.',
     '2026-09-05 10:00:00', 2),
-(1, 'Invoices are generated as PDF only',
+(1, 'Invoices are generated as PDF only', 'product',
     'Building both HTML and PDF invoices would take two extra weeks.',
     'Customers download a PDF. The design team must create one PDF template.',
     '2026-11-03 10:00:00', 1),
-(1, 'Mobile-first layout for every screen',
+(1, 'Mobile-first layout for every screen', 'design',
     'Most customers open the portal on their phone.',
     'All designs start at 360px width. Desktop is an enlarged version.',
     '2026-09-20 11:00:00', 1),
-(1, 'Login with email and password, no social login',
+(1, 'Login with email and password, no social login', 'backend',
     'Social login needs extra privacy checks the client does not want yet.',
     'Only email and password. Passwords are stored as hashes.',
     '2026-09-12 09:00:00', 2);
 
-INSERT INTO decision_options (decision_id, label, description, chosen) VALUES
-(1, 'PHP + MySQL',      'Everyone knows it, runs on the school server.', TRUE),
-(1, 'Node.js + MongoDB', 'Modern, but only one person knows it.',         FALSE),
-(2, 'PDF only',          'One template, faster to build.',                TRUE),
-(2, 'HTML and PDF',      'Two templates, two extra weeks.',               FALSE);
+INSERT INTO decision_options (decision_id, position, label, description, chosen) VALUES
+(1, 1, 'PHP + MySQL',      'Everyone knows it, runs on the school server.', TRUE),
+(1, 2, 'Node.js + MongoDB', 'Modern, but only one person knows it.',         FALSE),
+(2, 1, 'PDF only',          'One template, faster to build.',                TRUE),
+(2, 2, 'HTML and PDF',      'Two templates, two extra weeks.',               FALSE);
 
 INSERT INTO decision_roles (decision_id, role) VALUES
 (1, 'backend'), (1, 'frontend'),
@@ -153,13 +159,18 @@ INSERT INTO answers (question_id, author_id, body, created_at) VALUES
 INSERT INTO quiz_attempts (user_id, project_id, score_percent, taken_at) VALUES
 (3, 1, 90, '2026-09-20 10:00:00');
 
-INSERT INTO tasks (project_id, title, description, status, is_starter, assigned_to, due_date) VALUES
-(1, 'Review the invoice page wireframe', 'Leave comments on the invoice page design in Figma.', 'todo',        TRUE,  4,    '2026-11-20'),
-(1, 'Fix contrast on the login button',  'The button text fails the 4.5:1 contrast check.',     'todo',        TRUE,  NULL, '2026-11-25'),
-(1, 'Build invoice download',            'Customers can download a PDF of each invoice.',       'in_progress', FALSE, 2,    '2026-11-30'),
-(1, 'Test order history on mobile',      'Check the page at 320px width and 200% zoom.',        'review',      FALSE, 3,    '2026-11-18'),
-(1, 'Set up database',                   'Create tables and demo data.',                        'done',        FALSE, 2,    '2026-09-15');
+INSERT INTO tasks (project_id, title, description, status, is_starter, priority, assigned_to, due_date) VALUES
+(1, 'Review the invoice page wireframe', 'Leave comments on the invoice page design in Figma.', 'todo',        TRUE,  'high',   4,    CURRENT_DATE + INTERVAL 2 DAY),
+(1, 'Fix contrast on the login button',  'The button text fails the 4.5:1 contrast check.',     'todo',        TRUE,  'medium', NULL, CURRENT_DATE + INTERVAL 12 DAY),
+(1, 'Build invoice download',            'Customers can download a PDF of each invoice.',       'in_progress', FALSE, 'high',   2,    CURRENT_DATE + INTERVAL 17 DAY),
+(1, 'Test order history on mobile',      'Check the page at 320px width and 200% zoom.',        'review',      FALSE, 'medium', 3,    CURRENT_DATE + INTERVAL 5 DAY),
+(1, 'Set up database',                   'Create tables and demo data.',                        'done',        FALSE, 'high',   2,    '2026-09-15'),
+(1, 'Design the empty order history',    'Customers with no orders see a blank page. Design a friendly empty state.', 'todo', TRUE, 'low', NULL, CURRENT_DATE + INTERVAL 14 DAY),
+(1, 'Redesign the invoice download button', 'Make the download button match the new button style.', 'in_progress', FALSE, 'medium', 4, CURRENT_DATE + INTERVAL 6 DAY);
 
 INSERT INTO task_updates (task_id, user_id, kind, body, created_at) VALUES
-(3, 2, 'progress', 'PDF generation works, download button still missing.', '2026-11-09 16:00:00'),
-(4, 3, 'review',   'Ready for review, tested on 3 phones.',                '2026-11-11 15:00:00');
+(3, 2,  'progress', 'PDF generation works, download button still missing.', '2026-11-09 16:00:00'),
+(4, 3,  'review',   'Ready for review, tested on 3 phones.',                '2026-11-11 15:00:00'),
+(1, 10, 'handoff',  'Previous work: I planned the page structure and marked the open questions in Figma (page "Invoice", red comments).\nWhat you need to do: go through the wireframe, answer my comments and add your own.\nImportant: keep it consistent with the order history page. Maya decides on anything about the PDF layout.', '2026-11-03 14:30:00'),
+(7, 4,  'review',   'New button style applied on the invoice list and invoice page.', '2026-11-11 10:00:00'),
+(7, 2,  'feedback', 'Please check the spacing around the button and use the same size as the buttons on the order history page.', '2026-11-11 16:00:00');
