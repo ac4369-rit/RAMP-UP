@@ -1,6 +1,6 @@
 <h1><?= e(t($isFirst ? 'tasks.accepted.firstTitle' : 'tasks.accepted.title')) ?></h1>
 <?php require __DIR__ . '/../partials/flash.php'; ?>
-<p><?= e(t('tasks.accepted.body', ['title' => $task['title']])) ?></p>
+<p><?= e(t('tasks.accepted.body', ['title' => tc($task['title'])])) ?></p>
 <?php if ($isFirst): ?><p><?= e(t('tasks.accepted.firstBody')) ?></p><?php endif; ?>
 
 <?php if ($comment !== null && $comment['body'] !== ''): ?>

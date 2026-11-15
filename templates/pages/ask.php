@@ -3,13 +3,13 @@
 <p class="meta"><?= e(t('ask.intro')) ?></p>
 
 <?php if ($decisionTitle !== null): ?>
-  <p class="notice"><?= e(t('ask.related', ['title' => $decisionTitle])) ?></p>
+  <p class="notice"><?= e(t('ask.related', ['title' => tc($decisionTitle)])) ?></p>
 <?php endif; ?>
 
 <?php if ($match): ?>
   <div class="notice" role="status">
     <strong><?= e(t('ask.existing.title')) ?></strong>
-    <p><?= e($match['title']) ?></p>
+    <p><?= e(tc($match['title'])) ?></p>
     <a class="button" href="<?= $match['type'] === 'decision' ? '/decisions/' : '/questions/' ?><?= (int) $match['id'] ?>">
       <?= e(t($match['type'] === 'decision' ? 'ask.existing.viewDecision' : 'ask.existing.viewThread')) ?>
     </a>

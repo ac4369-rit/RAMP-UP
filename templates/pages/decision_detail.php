@@ -5,7 +5,7 @@
   <h1><?= e(t('decisions.detail')) ?></h1>
   <?php $retryHref = $_SERVER['REQUEST_URI']; require __DIR__ . '/../partials/states.php'; ?>
 <?php else: ?>
-  <h1><?= e($decision['title']) ?></h1>
+  <h1><?= e(tc($decision['title'])) ?></h1>
   <p class="meta">
     <?= e(t('decisions.decidedBy', ['name' => $decision['decided_by']])) ?>
     · <?= e(format_date($decision['decided_at'])) ?>

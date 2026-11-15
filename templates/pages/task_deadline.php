@@ -1,6 +1,6 @@
 <p><a href="/tasks/<?= (int) $task['id'] ?>">← <?= e(t('tasks.backToTask')) ?></a></p>
 <h1><?= e(t('tasks.deadline.title')) ?></h1>
-<p class="meta"><?= e($task['title']) ?></p>
+<p class="meta"><?= e(tc($task['title'])) ?></p>
 <p><?php $t = $task; require __DIR__ . '/../partials/task_meta.php'; ?></p>
 
 <?php if ($task['due_date'] === null): ?>

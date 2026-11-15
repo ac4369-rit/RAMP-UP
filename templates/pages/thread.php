@@ -12,7 +12,7 @@
 </blockquote>
 
 <?php if ($question['related_decision_id']): ?>
-  <p><a href="/decisions/<?= (int) $question['related_decision_id'] ?>"><?= e(t('thread.relatedDecision', ['title' => (string) $question['decision_title']])) ?></a></p>
+  <p><a href="/decisions/<?= (int) $question['related_decision_id'] ?>"><?= e(t('thread.relatedDecision', ['title' => tc($question['decision_title'])])) ?></a></p>
 <?php endif; ?>
 
 <?php if ($isAuthor): ?>

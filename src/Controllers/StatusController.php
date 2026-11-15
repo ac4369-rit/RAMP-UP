@@ -24,7 +24,8 @@ class StatusController extends Controller
             $st->execute(['pid' => $user['project_id']]);
             $project = $st->fetch() ?: null;
             if ($project === null) {
-                $this->notFound();
+                // The user has no project yet: show the empty state instead of "page not found".
+                throw new \DomainException('no project');
             }
 
             $st = $pdo->prepare('SELECT name, status, due_on FROM milestones WHERE project_id = :pid ORDER BY position');
@@ -48,6 +49,8 @@ class StatusController extends Controller
             if (!array_filter($milestones)) {
                 $state = 'empty';
             }
+        } catch (\DomainException) {
+            $state = 'empty';
         } catch (PDOException $e) {
             error_log($e->getMessage());
             $state = 'error';

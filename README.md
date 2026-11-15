@@ -84,6 +84,7 @@ All demo accounts use the password **`rampup123`**. The full list (and the invit
 - The language is chosen with the selector in the header (`?lang=xx`) and remembered in a cookie. The `<html lang="…">` attribute follows it.
 - Texts live in `lang/en.php`, `lang/hr.php` and `lang/ja.php`, with hierarchical keys such as `buddy.cancelTitle`. Plurals use ICU messages, for example `{count, plural, one {# odluka} few {# odluke} other {# odluka}}`.
 - Dates, times, weekday names and numbers are formatted with PHP `intl` (`IntlDateFormatter`, `NumberFormatter`), and names are sorted with `Collator`.
+- Link texts that come from the database (resource, task and decision titles) are translated with `tc()` from `lang/content/hr.php` and `lang/content/ja.php` (English text → translation). Text without a translation is shown as stored.
 - A missing key falls back to English. With `APP_DEBUG=true` it is shown as `⚠ key` so it is easy to spot.
 
 **Adding a language:** copy `lang/en.php` to `lang/xx.php`, translate every value (keep the keys), then add `'xx'` to `SUPPORTED` and `NAMES` in `src/Translator.php`. For a right-to-left language, also add its code to `RTL` in the same file.

@@ -53,3 +53,19 @@
     <div class="actions"><button type="submit" class="primary"><?= e(t('profile.save')) ?></button></div>
   </form>
 <?php endif; ?>
+
+<?php $me = \App\Auth::user(); ?>
+<?php if ($me !== null): ?>
+  <section class="card account" aria-labelledby="account-title">
+    <h2 id="account-title"><?= e(t('profile.account')) ?></h2>
+    <p class="meta"><?= e(t('profile.signedInAs', ['email' => $me['email']])) ?></p>
+    <form method="post" action="/logout">
+      <?= csrf_field() ?>
+      <button type="submit" class="button-secondary">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+        <?= e(t('nav.logout')) ?>
+      </button>
+    </form>
+  </section>
+<?php endif; ?>

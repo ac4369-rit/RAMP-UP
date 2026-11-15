@@ -27,7 +27,7 @@
       <?php foreach ($results as $r): ?>
         <li>
           <small class="tag"><?= e(t('search.types.' . $r['type'])) ?></small><br>
-          <a href="<?= e($r['href']) ?>"><?= e($r['title']) ?></a>
+          <a href="<?= e($r['href']) ?>"><?= e(tc($r['title'])) ?></a>
           <?php if ($r['snippet'] !== ''): ?><br><small class="meta"><?= e($r['snippet']) ?></small><?php endif; ?>
         </li>
       <?php endforeach; ?>

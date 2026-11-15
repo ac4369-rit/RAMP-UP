@@ -37,7 +37,7 @@
   <?php else: ?>
     <ul class="list">
       <?php foreach ($gaps as $g): ?>
-        <li><a href="/decisions/<?= (int) $g['id'] ?>"><?= e($g['title']) ?></a></li>
+        <li><a href="/decisions/<?= (int) $g['id'] ?>"><?= e(tc($g['title'])) ?></a></li>
       <?php endforeach; ?>
     </ul>
   <?php endif; ?>
