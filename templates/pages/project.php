@@ -8,14 +8,14 @@
   <p class="meta"><?= e($project['name']) ?></p>
   <dl>
     <dt><?= e(t('project.what')) ?></dt>
-    <dd><?= nl2br(e($project['description'] ?? t('project.unknown'))) ?></dd>
+    <dd><?= nl2br(e(tc($project['description'] ?? t('project.unknown')))) ?></dd>
 
     <dt><?= e(t('project.forWho')) ?></dt>
-    <dd><?= nl2br(e($project['audience'] ?? t('project.unknown'))) ?></dd>
+    <dd><?= nl2br(e(tc($project['audience'] ?? t('project.unknown')))) ?></dd>
 
     <dt><?= e(t('project.whereWeStand')) ?></dt>
     <dd>
-      <?= nl2br(e($project['current_status'] ?? t('project.unknown'))) ?>
+      <?= nl2br(e(tc($project['current_status'] ?? t('project.unknown')))) ?>
       <br><small class="meta">
         <?= e(format_date($project['sprint_starts_on'])) ?> – <?= e(format_date($project['sprint_ends_on'])) ?>
         · <?= e(t('project.daysLeft', ['count' => $daysLeft])) ?>

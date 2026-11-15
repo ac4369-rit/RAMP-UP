@@ -9,7 +9,7 @@
     --brand:        #1d4a6e;   /* header, primary buttons */
     --brand-dark:   #133650;   /* hover on primary buttons */
     --brand-soft:   #e3edf5;   /* light background for secondary buttons, current tab */
-    --accent:       #2a8c82;   /* "you are here", arrows, small highlights */
+    --accent:       #23746b;   /* "you are here", arrows, small highlights (5.5:1 with white) */
     --accent-soft:  #e1f3f0;
 
     --link:         #0d2f4f;   /* links: dark navy (contrast 13:1 on white) */
@@ -114,9 +114,14 @@ a:hover {
 
 /* One visible focus style for everything you can tab to */
 :focus-visible {
-    outline: 3px solid #f2a900;
+    outline: 3px solid var(--brand);   /* 8.5:1 against the page */
     outline-offset: 2px;
     border-radius: 4px;
+}
+
+/* On the dark header the ring is white instead */
+.app-header :focus-visible {
+    outline-color: #ffffff;
 }
 
 main:focus {
@@ -515,7 +520,7 @@ select {
     min-height: 44px;
     margin: 4px 0 16px;
     padding: 10px 12px;
-    border: 1px solid #b9c4cf;
+    border: 1px solid #7b8794;   /* 3.7:1, so the field edge is visible */
     border-radius: var(--radius-sm);
     background-color: var(--surface);
     color: var(--text);

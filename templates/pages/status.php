@@ -7,8 +7,8 @@
   <?php $messageKey = $project === null ? 'home.noProject' : 'status.empty'; require __DIR__ . '/../partials/states.php'; ?>
 <?php else: ?>
   <section aria-labelledby="sprint">
-    <h2 id="sprint"><?= e(t('status.sprint', ['number' => $project['sprint_number']])) ?>: <?= e($project['sprint_name']) ?></h2>
-    <p><?= e($project['sprint_goal']) ?></p>
+    <h2 id="sprint"><?= e(t('status.sprint', ['number' => $project['sprint_number']])) ?>: <?= e(tc($project['sprint_name'])) ?></h2>
+    <p><?= e(tc($project['sprint_goal'])) ?></p>
     <p class="meta">
       <?= e(format_date($project['sprint_starts_on'])) ?> – <?= e(format_date($project['sprint_ends_on'])) ?>
       · <?= e(t('status.daysLeft', ['count' => $daysLeft])) ?>
@@ -43,7 +43,7 @@
           <ul class="plain">
             <?php foreach ($milestones[$key] as $m): ?>
               <li>
-                <?= e($m['name']) ?>
+                <?= e(tc($m['name'])) ?>
                 <?php if ($m['due_on']): ?><br><small class="meta"><?= e(t('status.due', ['date' => format_date($m['due_on'])])) ?></small><?php endif; ?>
               </li>
             <?php endforeach; ?>
