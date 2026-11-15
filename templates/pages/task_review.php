@@ -1,6 +1,6 @@
 <p><a href="/tasks/<?= (int) $task['id'] ?>">← <?= e(t('tasks.backToTask')) ?></a></p>
 <h1><?= e(t('tasks.review.title')) ?></h1>
-<p class="meta"><?= e($task['title']) ?></p>
+<p class="meta"><?= e(tc($task['title'])) ?></p>
 <p><?= e(t('tasks.review.intro')) ?></p>
 
 <?php if ($errors): ?>

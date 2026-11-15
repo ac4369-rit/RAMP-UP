@@ -7,6 +7,7 @@ use App\Controllers\AccessController;
 use App\Controllers\BuddyController;
 use App\Controllers\CheckController;
 use App\Controllers\DecisionController;
+use App\Controllers\ErrorController;
 use App\Controllers\GlossaryController;
 use App\Controllers\HelloController;
 use App\Controllers\HomeController;
@@ -43,6 +44,7 @@ $router = new Router();
 
 $router->get('/', fn () => header('Location: /home', true, 302));
 
+$router->get('/offline',                [ErrorController::class,   'offline']);
 $router->get('/login',                  [JoinController::class,    'login']);
 $router->post('/login',                 [JoinController::class,    'doLogin']);
 $router->post('/logout',                [JoinController::class,    'logout']);

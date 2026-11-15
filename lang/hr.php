@@ -142,6 +142,8 @@ return [
         'addSkill'     => 'Dodaj vještinu',
         'availability' => 'Dani kad mogu raditi',
         'save'         => 'Spremi profil',
+        'account'      => 'Račun',
+        'signedInAs'   => 'Prijavljen kao {email}',
         'error' => [
             'tooLong' => 'Vještina može imati najviše 60 znakova.',
             'tooMany' => 'Možeš dodati najviše 12 vještina.',
@@ -244,6 +246,7 @@ return [
         'path'      => 'Dosadašnji put',
         'achieved'  => 'Završeno',
         'now'       => 'Sada',
+        'youAreHere' => 'Ovdje smo sada',
         'next'      => 'Sljedeće',
         'none'      => 'Ništa.',
         'due'       => 'Rok: {date}',

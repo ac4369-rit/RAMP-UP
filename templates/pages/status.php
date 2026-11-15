@@ -4,7 +4,7 @@
 <?php if ($state === 'error'): ?>
   <?php $retryHref = $_SERVER['REQUEST_URI']; require __DIR__ . '/../partials/states.php'; ?>
 <?php elseif ($state === 'empty'): ?>
-  <?php $messageKey = 'status.empty'; require __DIR__ . '/../partials/states.php'; ?>
+  <?php $messageKey = $project === null ? 'home.noProject' : 'status.empty'; require __DIR__ . '/../partials/states.php'; ?>
 <?php else: ?>
   <section aria-labelledby="sprint">
     <h2 id="sprint"><?= e(t('status.sprint', ['number' => $project['sprint_number']])) ?>: <?= e($project['sprint_name']) ?></h2>
@@ -17,9 +17,26 @@
 
   <h2><?= e(t('status.path')) ?></h2>
   <div class="timeline">
-    <?php foreach (['done' => 'status.achieved', 'current' => 'status.now', 'upcoming' => 'status.next'] as $key => $label): ?>
-      <div class="<?= $key === 'current' ? 'current' : '' ?>">
-        <h3><?= e(t($label)) ?></h3>
+    <?php $stages = ['done' => 'status.achieved', 'current' => 'status.now', 'upcoming' => 'status.next']; $i = 0; ?>
+    <?php foreach ($stages as $key => $label): ?>
+      <?php if ($i++ > 0): ?>
+        <div class="timeline__arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"/><path d="m6 14 6 6 6-6"/></svg>
+        </div>
+      <?php endif; ?>
+      <section class="stage stage--<?= e($key) ?>" aria-labelledby="stage-<?= e($key) ?>"<?= $key === 'current' ? ' aria-current="step"' : '' ?>>
+        <h3 id="stage-<?= e($key) ?>">
+          <span class="stage__dot" aria-hidden="true"><?= $key === 'done' ? '✓' : ($key === 'current' ? '●' : '○') ?></span>
+          <?= e(t($label)) ?>
+        </h3>
+        <?php if ($key === 'current'): ?>
+          <p class="stage__here">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            <?= e(t('status.youAreHere')) ?>
+          </p>
+        <?php endif; ?>
         <?php if (!$milestones[$key]): ?>
           <p class="meta"><?= e(t('status.none')) ?></p>
         <?php else: ?>
@@ -32,7 +49,7 @@
             <?php endforeach; ?>
           </ul>
         <?php endif; ?>
-      </div>
+      </section>
     <?php endforeach; ?>
   </div>
 

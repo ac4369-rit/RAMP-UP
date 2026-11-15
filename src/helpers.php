@@ -145,3 +145,21 @@ function async_attrs(): string
         e(t('state.retry'))
     );
 }
+
+/**
+ * Shows project content from the database (a resource, task or decision title)
+ * in the current language when lang/content/{locale}.php has a translation for it.
+ * Anything without a translation is shown exactly as stored.
+ */
+function tc(?string $text): string
+{
+    static $maps = [];
+    $text   = $text ?? '';
+    $locale = Translator::instance()->locale();
+
+    if (!isset($maps[$locale])) {
+        $file = dirname(__DIR__) . '/lang/content/' . $locale . '.php';
+        $maps[$locale] = is_file($file) ? (array) require $file : [];
+    }
+    return $maps[$locale][$text] ?? $text;
+}

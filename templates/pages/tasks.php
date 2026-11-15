@@ -11,7 +11,7 @@
   <ul class="list">
     <?php foreach ($tasks as $t): ?>
       <li class="task-card">
-        <h2><a href="/tasks/<?= (int) $t['id'] ?>"><?= e($t['title']) ?></a></h2>
+        <h2><a href="/tasks/<?= (int) $t['id'] ?>"><?= e(tc($t['title'])) ?></a></h2>
         <?php require __DIR__ . '/../partials/task_meta.php'; ?>
       </li>
     <?php endforeach; ?>
@@ -25,7 +25,7 @@
     <ul class="list">
       <?php foreach ($toReview as $t): ?>
         <li>
-          <a href="/tasks/<?= (int) $t['id'] ?>"><?= e($t['title']) ?></a>
+          <a href="/tasks/<?= (int) $t['id'] ?>"><?= e(tc($t['title'])) ?></a>
           <br><small class="meta"><?= e(t('tasks.assignedTo', ['name' => $t['assignee']])) ?></small>
         </li>
       <?php endforeach; ?>

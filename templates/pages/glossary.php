@@ -15,7 +15,7 @@
     <p><a class="button" href="/ask?q=<?= e(rawurlencode($q)) ?>"><?= e(t('glossary.askTeam')) ?></a></p>
   <?php else: ?>
     <p aria-live="polite"><?= e(t('glossary.count', ['count' => count($terms)])) ?></p>
-    <table>
+    <table class="responsive-table">
       <caption class="visually-hidden"><?= e(t('glossary.title')) ?></caption>
       <thead>
         <tr>
@@ -27,9 +27,9 @@
       <tbody>
         <?php foreach ($terms as $term): ?>
           <tr>
-            <th scope="row"><?= e($term['term']) ?></th>
-            <td><?= e($term['definition']) ?></td>
-            <td><?= e($term['used_in'] ?? '') ?></td>
+            <th scope="row" data-label="<?= e(t('glossary.term')) ?>"><?= e($term['term']) ?></th>
+            <td data-label="<?= e(t('glossary.definition')) ?>"><?= e($term['definition']) ?></td>
+            <td data-label="<?= e(t('glossary.used')) ?>"><?= e($term['used_in'] ?? '') ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

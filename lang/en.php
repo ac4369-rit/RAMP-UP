@@ -142,6 +142,8 @@ return [
         'addSkill'     => 'Add a skill',
         'availability' => 'Days I can work',
         'save'         => 'Save profile',
+        'account'      => 'Account',
+        'signedInAs'   => 'Signed in as {email}',
         'error' => [
             'tooLong' => 'A skill can be at most 60 characters long.',
             'tooMany' => 'You can add at most 12 skills.',
@@ -244,6 +246,7 @@ return [
         'path'      => 'The path so far',
         'achieved'  => 'Done',
         'now'       => 'Now',
+        'youAreHere' => 'You are here',
         'next'      => 'Next',
         'none'      => 'Nothing here.',
         'due'       => 'Due {date}',

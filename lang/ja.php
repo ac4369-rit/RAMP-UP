@@ -143,6 +143,8 @@ return [
         'addSkill'     => 'スキルを追加',
         'availability' => '作業できる曜日',
         'save'         => 'プロフィールを保存',
+        'account'      => 'アカウント',
+        'signedInAs'   => '{email} としてログイン中',
         'error' => [
             'tooLong' => 'スキルは60文字以内で入力してください。',
             'tooMany' => 'スキルは最大12個まで登録できます。',
@@ -245,6 +247,7 @@ return [
         'path'      => 'これまでの道のり',
         'achieved'  => '完了',
         'now'       => '現在',
+        'youAreHere' => '現在地',
         'next'      => '次',
         'none'      => 'なし',
         'due'       => '期限：{date}',

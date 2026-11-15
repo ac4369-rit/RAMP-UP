@@ -22,7 +22,7 @@
     <?php $messageKey = 'decisions.empty'; require __DIR__ . '/../partials/states.php'; ?>
   <?php else: ?>
     <p aria-live="polite"><?= e(t('decisions.count', ['count' => count($decisions)])) ?></p>
-    <table>
+    <table class="responsive-table">
       <caption class="visually-hidden"><?= e(t('decisions.title')) ?></caption>
       <thead>
         <tr>
@@ -34,14 +34,14 @@
       <tbody>
         <?php foreach ($decisions as $d): ?>
           <tr>
-            <td>
-              <a href="/decisions/<?= (int) $d['id'] ?>"><?= e($d['title']) ?></a>
-              <br><small><?= e(format_date($d['decided_at'])) ?></small>
+            <td data-label="<?= e(t('decisions.col.decision')) ?>">
+              <a href="/decisions/<?= (int) $d['id'] ?>"><?= e(tc($d['title'])) ?></a>
+              <br><small class="meta"><?= e(format_date($d['decided_at'])) ?></small>
               <?php if ((int) $d['affects_me']): ?><br><strong class="badge badge--role"><?= e(t('decisions.affectsMe')) ?></strong><?php endif; ?>
-              <?php if (!(int) $d['is_read']): ?><strong class="badge"><?= e(t('decisions.unread')) ?></strong><?php endif; ?>
+              <?php if (!(int) $d['is_read']): ?><?php if (!(int) $d['affects_me']): ?><br><?php endif; ?><strong class="badge badge--unread"><?= e(t('decisions.unread')) ?></strong><?php endif; ?>
             </td>
-            <td><?= e($d['decided_by']) ?></td>
-            <td><?= e(t('decisions.status.' . $d['status'])) ?></td>
+            <td data-label="<?= e(t('decisions.col.who')) ?>"><?= e($d['decided_by']) ?></td>
+            <td data-label="<?= e(t('decisions.col.status')) ?>"><span class="badge badge--<?= e($d['status']) ?>"><?= e(t('decisions.status.' . $d['status'])) ?></span></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

@@ -1,5 +1,5 @@
 <p><a href="/tasks">← <?= e(t('tasks.back')) ?></a></p>
-<h1><?= e($task['title']) ?></h1>
+<h1><?= e(tc($task['title'])) ?></h1>
 <?php require __DIR__ . '/../partials/flash.php'; ?>
 
 <p><?php $t = $task; require __DIR__ . '/../partials/task_meta.php'; ?></p>
@@ -40,7 +40,7 @@
 <?php elseif ($task['assigned_to'] === null && $task['is_starter']): ?>
   <form method="post" action="/tasks/<?= (int) $task['id'] ?>/take">
     <?= csrf_field() ?>
-    <button type="submit" class="primary"><?= e(t('tasks.starter.take', ['title' => $task['title']])) ?></button>
+    <button type="submit" class="primary"><?= e(t('tasks.starter.take', ['title' => tc($task['title'])])) ?></button>
   </form>
 <?php endif; ?>
 
