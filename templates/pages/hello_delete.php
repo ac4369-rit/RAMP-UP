@@ -1,6 +1,6 @@
 <h1><?= e(t('hello.deleteTitle')) ?></h1>
 <p><?= e(t('hello.deleteBody')) ?></p>
-<blockquote><?= nl2br(e($post['body'])) ?></blockquote>
+<blockquote><?= nl2br(e(tc($post['body']))) ?></blockquote>
 <form method="post" action="/hello/<?= (int) $post['id'] ?>/delete">
   <?= csrf_field() ?>
   <div class="actions">

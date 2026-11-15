@@ -27,9 +27,9 @@
       <tbody>
         <?php foreach ($terms as $term): ?>
           <tr>
-            <th scope="row" data-label="<?= e(t('glossary.term')) ?>"><?= e($term['term']) ?></th>
-            <td data-label="<?= e(t('glossary.definition')) ?>"><?= e($term['definition']) ?></td>
-            <td data-label="<?= e(t('glossary.used')) ?>"><?= e($term['used_in'] ?? '') ?></td>
+            <th scope="row" data-label="<?= e(t('glossary.term')) ?>"><?= e(tc($term['term'])) ?></th>
+            <td data-label="<?= e(t('glossary.definition')) ?>"><?= e(tc($term['definition'])) ?></td>
+            <td data-label="<?= e(t('glossary.used')) ?>"><?= e(tc($term['used_in'] ?? '')) ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

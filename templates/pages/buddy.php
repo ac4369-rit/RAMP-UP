@@ -9,7 +9,7 @@
   <section class="card" aria-labelledby="buddy-name">
     <p class="meta"><?= e(t('buddy.yourBuddy')) ?></p>
     <h2 id="buddy-name"><?= e($buddy['name']) ?></h2>
-    <?php if ($buddy['job_title']): ?><p class="meta"><?= e($buddy['job_title']) ?></p><?php endif; ?>
+    <?php if ($buddy['job_title']): ?><p class="meta"><?= e(tc($buddy['job_title'])) ?></p><?php endif; ?>
   </section>
 
   <h2><?= e(t('buddy.book', ['minutes' => 15])) ?></h2>

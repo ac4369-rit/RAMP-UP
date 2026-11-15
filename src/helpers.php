@@ -147,19 +147,84 @@ function async_attrs(): string
 }
 
 /**
- * Shows project content from the database (a resource, task or decision title)
- * in the current language when lang/content/{locale}.php has a translation for it.
- * Anything without a translation is shown exactly as stored.
+ * The content translations for the current language (lang/content/{locale}.php):
+ * English text as stored in the database => text to show.
+ *
+ * @return array<string, string>
  */
-function tc(?string $text): string
+function content_map(): array
 {
     static $maps = [];
-    $text   = $text ?? '';
     $locale = Translator::instance()->locale();
 
     if (!isset($maps[$locale])) {
         $file = dirname(__DIR__) . '/lang/content/' . $locale . '.php';
         $maps[$locale] = is_file($file) ? (array) require $file : [];
     }
-    return $maps[$locale][$text] ?? $text;
+    return $maps[$locale];
+}
+
+/**
+ * Shows project content from the database (titles, notes, messages, glossary…)
+ * in the current language when lang/content/{locale}.php has a translation for it.
+ * Anything without a translation (for example a post someone just wrote) is shown exactly as stored.
+ */
+function tc(?string $text): string
+{
+    $text = $text ?? '';
+    if ($text === '') {
+        return '';
+    }
+    $map = content_map();
+    // Line endings can be \r\n when the seed was imported on Windows.
+    return $map[$text] ?? $map[str_replace("\r\n", "\n", $text)] ?? $text;
+}
+
+/**
+ * Search helper: the English database texts whose translation contains $query.
+ * Lets people search in their own language even though the database stores English.
+ *
+ * @return list<string>
+ */
+function tc_sources(string $query): array
+{
+    $query = mb_strtolower(trim($query));
+    if ($query === '') {
+        return [];
+    }
+    $found = [];
+    foreach (content_map() as $english => $shown) {
+        if (mb_strpos(mb_strtolower($shown), $query) !== false) {
+            $found[] = $english;
+            $found[] = str_replace("\n", "\r\n", $english);   // same text saved with Windows line endings
+        }
+    }
+    return array_values(array_unique($found));
+}
+
+/**
+ * Builds "column IN (:p0, :p1, …)" for a list of values and adds the values to $params.
+ * With an empty list it returns "0 = 1" (matches nothing), so it can always be OR-ed into a query.
+ */
+function sql_in(string $column, array $values, string $prefix, array &$params): string
+{
+    if (!$values) {
+        return '0 = 1';
+    }
+    $names = [];
+    foreach (array_values($values) as $i => $value) {
+        $names[] = ':' . $prefix . $i;
+        $params[$prefix . $i] = $value;
+    }
+    return $column . ' IN (' . implode(', ', $names) . ')';
+}
+
+/**
+ * Sorts rows by a text column the way the current language sorts words
+ * (after translating the text with tc()).
+ */
+function sort_by_translated(array &$rows, string $column): void
+{
+    $collator = new \Collator(Translator::instance()->locale());
+    usort($rows, fn ($a, $b) => $collator->compare(tc($a[$column] ?? ''), tc($b[$column] ?? '')));
 }
