@@ -25,7 +25,7 @@ INSERT INTO projects (name, description, audience, current_status, repo, quiz_ur
  'A web portal where customers can see their orders, download invoices and contact support in one place.',
  'Existing customers of a mid-sized online shop and the support team that answers their questions.',
  'Login and order history are finished. The invoice page is in progress and support chat starts next sprint.',
- 'ac4369-rit/RAMP-UP', 'https://forms.example.com/atlas-quiz',
+ 'ac4369-rit/project1', 'https://forms.example.com/atlas-quiz',
  4, 'Invoices', 'Customers can download every invoice as a PDF.',
  '2026-11-02', '2026-11-20', 1),
 ('Library Booking System',
@@ -64,7 +64,7 @@ INSERT INTO project_tools (project_id, name, url) VALUES
 (1, 'Figma',        'https://figma.com/file/example-atlas'),
 (1, 'Google Drive', 'https://drive.google.com/example-atlas'),
 (1, 'Discord',      'https://discord.gg/example-atlas'),
-(1, 'GitHub',       'https://github.com/ac4369-rit/RAMP-UP');
+(1, 'GitHub',       'https://github.com/ac4369-rit/project1');
 
 INSERT INTO tool_access (tool_id, user_id, status) VALUES
 (1, 4, 'granted'),
@@ -144,7 +144,7 @@ INSERT INTO resources (project_id, role, title, url, kind, verified_at, verified
 (1, 'design',  'Old style guide (v1)',    'https://example.com/atlas/style-v1.pdf', 'doc',    '2026-08-01 10:00:00', 1),
 (1, 'design',  'Accessibility checklist', 'https://example.com/atlas/a11y.md',      'doc',    NULL,                  NULL),
 (1, 'backend', 'Backend setup guide',     'https://example.com/atlas/backend',      'guide',  '2026-11-01 09:00:00', 2),
-(1, 'backend', 'Code repository',         'https://github.com/ac4369-rit/RAMP-UP',  'repo',   '2026-11-01 09:00:00', 2),
+(1, 'backend', 'Code repository',         'https://github.com/ac4369-rit/project1',  'repo',   '2026-11-01 09:00:00', 2),
 (1, 'frontend','Component list',          'https://example.com/atlas/components',   'doc',    '2026-10-25 09:00:00', 3);
 
 INSERT INTO questions (project_id, author_id, to_user_id, area, body, related_decision_id, created_at) VALUES
