@@ -2,7 +2,7 @@
 <h1><?= e(t('thread.title')) ?></h1>
 
 <blockquote>
-  <?= nl2br(e($question['body'])) ?>
+  <?= nl2br(e(tc($question['body']))) ?>
   <br><small class="meta">
     <?= e(t('thread.askedBy', ['name' => $question['author_name']])) ?>
     · <?= e(format_datetime($question['created_at'])) ?>
@@ -31,7 +31,7 @@
       <li id="answer-<?= (int) $a['id'] ?>">
         <strong><?= e($a['name']) ?></strong>
         <small class="meta"><?= e(format_datetime($a['created_at'])) ?></small>
-        <p><?= nl2br(e($a['body'])) ?></p>
+        <p><?= nl2br(e(tc($a['body']))) ?></p>
       </li>
     <?php endforeach; ?>
   </ol>

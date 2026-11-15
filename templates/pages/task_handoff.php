@@ -9,7 +9,7 @@
   <?php foreach ($notes as $n): ?>
     <section class="task-card">
       <h2><?= e(t('tasks.handoff.from', ['name' => $n['name'], 'date' => format_date($n['created_at'])])) ?></h2>
-      <p><?= nl2br(e($n['body'])) ?></p>
+      <p><?= nl2br(e(tc($n['body']))) ?></p>
     </section>
   <?php endforeach; ?>
 <?php endif; ?>

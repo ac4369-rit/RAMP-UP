@@ -29,39 +29,61 @@ class SearchController extends Controller
                 $like = '%' . addcslashes($q, '%_\\') . '%';
                 $pid  = $user['project_id'];
 
+                // Texts whose translation contains the search words (e.g. "račun"), so people can search in their own language.
+                $sources = tc_sources($q);
+
                 if ($type === 'all' || $type === 'decisions') {
+                    $params = ['pid' => $pid, 'a' => $like, 'b' => $like, 'c' => $like];
                     $st = $pdo->prepare(
-                        'SELECT id, title, LEFT(context, 140) AS snippet FROM decisions
-                          WHERE project_id = :pid AND (title LIKE :a OR context LIKE :b OR consequences LIKE :c)
+                        'SELECT id, title, context AS snippet FROM decisions
+                          WHERE project_id = :pid
+                            AND (title LIKE :a OR context LIKE :b OR consequences LIKE :c
+                                 OR ' . sql_in('title', $sources, 'd1_', $params) . '
+                                 OR ' . sql_in('context', $sources, 'd2_', $params) . '
+                                 OR ' . sql_in('consequences', $sources, 'd3_', $params) . ')
                           ORDER BY decided_at DESC LIMIT 20'
                     );
-                    $st->execute(['pid' => $pid, 'a' => $like, 'b' => $like, 'c' => $like]);
+                    $st->execute($params);
                     foreach ($st->fetchAll() as $r) {
                         $results[] = ['type' => 'decisions', 'href' => '/decisions/' . $r['id']] + $r;
                     }
                 }
                 if ($type === 'all' || $type === 'glossary') {
+                    $params = ['pid' => $pid, 'a' => $like, 'b' => $like];
                     $st = $pdo->prepare(
                         'SELECT id, term AS title, definition AS snippet FROM glossary_terms
-                          WHERE project_id = :pid AND (term LIKE :a OR definition LIKE :b)
+                          WHERE project_id = :pid
+                            AND (term LIKE :a OR definition LIKE :b
+                                 OR ' . sql_in('term', $sources, 'g1_', $params) . '
+                                 OR ' . sql_in('definition', $sources, 'g2_', $params) . ')
                           ORDER BY term LIMIT 20'
                     );
-                    $st->execute(['pid' => $pid, 'a' => $like, 'b' => $like]);
+                    $st->execute($params);
                     foreach ($st->fetchAll() as $r) {
-                        $results[] = ['type' => 'glossary', 'href' => '/glossary?q=' . rawurlencode($r['title'])] + $r;
+                        $results[] = ['type' => 'glossary', 'href' => '/glossary?q=' . rawurlencode(tc($r['title']))] + $r;
                     }
                 }
                 if ($type === 'all' || $type === 'questions') {
+                    $params = ['pid' => $pid, 'a' => $like];
                     $st = $pdo->prepare(
-                        'SELECT id, LEFT(body, 90) AS title, "" AS snippet FROM questions
-                          WHERE project_id = :pid AND body LIKE :a
+                        'SELECT id, body AS title, "" AS snippet FROM questions
+                          WHERE project_id = :pid
+                            AND (body LIKE :a OR ' . sql_in('body', $sources, 'q1_', $params) . ')
                           ORDER BY created_at DESC LIMIT 20'
                     );
-                    $st->execute(['pid' => $pid, 'a' => $like]);
+                    $st->execute($params);
                     foreach ($st->fetchAll() as $r) {
                         $results[] = ['type' => 'questions', 'href' => '/questions/' . $r['id']] + $r;
                     }
                 }
+
+                // Translate first, then shorten (a shortened English text would never match its translation).
+                foreach ($results as &$r) {
+                    $r['title']   = mb_strimwidth(tc($r['title']), 0, 90, '…');
+                    $r['snippet'] = mb_strimwidth(tc($r['snippet']), 0, 140, '…');
+                }
+                unset($r);
+
                 if (!$results) {
                     $state = 'empty';
                 }

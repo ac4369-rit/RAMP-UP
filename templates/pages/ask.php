@@ -9,7 +9,7 @@
 <?php if ($match): ?>
   <div class="notice" role="status">
     <strong><?= e(t('ask.existing.title')) ?></strong>
-    <p><?= e(tc($match['title'])) ?></p>
+    <p><?= e(mb_strimwidth(tc($match['title']), 0, 120, '…')) ?></p>
     <a class="button" href="<?= $match['type'] === 'decision' ? '/decisions/' : '/questions/' ?><?= (int) $match['id'] ?>">
       <?= e(t($match['type'] === 'decision' ? 'ask.existing.viewDecision' : 'ask.existing.viewThread')) ?>
     </a>
@@ -30,7 +30,7 @@ require __DIR__ . '/../partials/question_form.php';
     <ul class="list">
       <?php foreach ($mine as $m): ?>
         <li>
-          <a href="/questions/<?= (int) $m['id'] ?>"><?= e(mb_strimwidth($m['body'], 0, 80, '…')) ?></a><br>
+          <a href="/questions/<?= (int) $m['id'] ?>"><?= e(mb_strimwidth(tc($m['body']), 0, 80, '…')) ?></a><br>
           <small class="meta"><?= e(t('ask.replies', ['count' => (int) $m['replies']])) ?> · <?= e(format_date($m['created_at'])) ?></small>
         </li>
       <?php endforeach; ?>

@@ -14,7 +14,7 @@
 
 <dl>
   <dt><?= e(t('tasks.detail.description')) ?></dt>
-  <dd><?= nl2br(e($task['description'] ?: t('tasks.detail.noDescription'))) ?></dd>
+  <dd><?= nl2br(e($task['description'] ? tc($task['description']) : t('tasks.detail.noDescription'))) ?></dd>
   <?php if ($isMine): ?>
     <dt><?= e(t('tasks.detail.nextStep')) ?></dt>
     <dd><?= e(t('tasks.next.' . $task['status'])) ?></dd>
@@ -76,7 +76,7 @@
         <li>
           <strong class="tag"><?= e(t('tasks.kind.' . $h['kind'])) ?></strong>
           <small class="meta"><?= e($h['name']) ?> · <?= e(format_datetime($h['created_at'])) ?></small>
-          <?php if ($h['body'] !== ''): ?><p><?= nl2br(e($h['body'])) ?></p><?php endif; ?>
+          <?php if ($h['body'] !== ''): ?><p><?= nl2br(e(tc($h['body']))) ?></p><?php endif; ?>
         </li>
       <?php endforeach; ?>
     </ol>

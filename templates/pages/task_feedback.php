@@ -9,7 +9,7 @@
   <section class="task-card">
     <h2><?= e(t('tasks.feedback.changes')) ?></h2>
     <?php foreach ($feedback as $i => $f): ?>
-      <p<?= $i > 0 ? ' class="meta"' : '' ?>><?= nl2br(e($f['body'])) ?>
+      <p<?= $i > 0 ? ' class="meta"' : '' ?>><?= nl2br(e(tc($f['body']))) ?>
         <br><small class="meta"><?= e(t('tasks.feedback.from', ['name' => $f['name'], 'date' => format_date($f['created_at'])])) ?></small></p>
     <?php endforeach; ?>
 

@@ -30,7 +30,8 @@ class DecisionController extends Controller
                      WHERE d.project_id = :pid';
             $params = ['role' => $user['role'], 'uid' => $user['id'], 'pid' => $user['project_id']];
             if ($q !== '') {
-                $sql .= ' AND d.title LIKE :q';
+                // Also match titles whose translation contains the words (e.g. "PDF-u" or "請求書").
+                $sql .= ' AND (d.title LIKE :q OR ' . sql_in('d.title', tc_sources($q), 't', $params) . ')';
                 $params['q'] = '%' . addcslashes($q, '%_\\') . '%';
             }
             if ($area !== '') {

@@ -17,7 +17,7 @@
 
   <details open>
     <summary><?= e(t('decisions.context')) ?></summary>
-    <p><?= nl2br(e($decision['context'])) ?></p>
+    <p><?= nl2br(e(tc($decision['context']))) ?></p>
   </details>
 
   <details>
@@ -28,9 +28,9 @@
       <ul class="plain">
         <?php foreach ($options as $o): ?>
           <li>
-            <strong><?= e($o['label']) ?></strong>
+            <strong><?= e(tc($o['label'])) ?></strong>
             <?php if ((int) $o['chosen']): ?><span class="badge badge--role"><?= e(t('decisions.chosen')) ?></span><?php endif; ?>
-            <?php if ($o['description']): ?><br><small class="meta"><?= e($o['description']) ?></small><?php endif; ?>
+            <?php if ($o['description']): ?><br><small class="meta"><?= e(tc($o['description'])) ?></small><?php endif; ?>
           </li>
         <?php endforeach; ?>
       </ul>
@@ -39,7 +39,7 @@
 
   <details open>
     <summary><?= e(t('decisions.consequences')) ?></summary>
-    <p><?= nl2br(e($decision['consequences'])) ?></p>
+    <p><?= nl2br(e(tc($decision['consequences']))) ?></p>
   </details>
 
   <div class="actions">

@@ -34,6 +34,10 @@ class ResourceController extends Controller
                 }
                 $groups[$r['kind']][] = $r;
             }
+            foreach ($groups as &$items) {
+                sort_by_translated($items, 'title');   // A–Z in the reader's language
+            }
+            unset($items);
             if (!$groups) {
                 $state = 'empty';
             }

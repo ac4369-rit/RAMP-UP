@@ -1,7 +1,7 @@
 <?php /** @var array $question */ ?>
 <h1><?= e(t('delete.title')) ?></h1>
 <p><?= e(t('delete.body')) ?></p>
-<blockquote><?= nl2br(e($question['body'])) ?></blockquote>
+<blockquote><?= nl2br(e(tc($question['body']))) ?></blockquote>
 <form method="post" action="/questions/<?= (int) $question['id'] ?>/delete">
   <?= csrf_field() ?>
   <div class="actions">

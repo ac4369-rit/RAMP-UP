@@ -5,7 +5,7 @@
 
 <?php if ($comment !== null && $comment['body'] !== ''): ?>
   <blockquote>
-    <?= nl2br(e($comment['body'])) ?>
+    <?= nl2br(e(tc($comment['body']))) ?>
     <br><small class="meta"><?= e(t('tasks.feedback.from', ['name' => $comment['name'], 'date' => format_date($comment['created_at'])])) ?></small>
   </blockquote>
 <?php endif; ?>

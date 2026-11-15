@@ -28,7 +28,7 @@
           <?php foreach ($skills as $i => $skill): ?>
             <li>
               <input id="skill-<?= $i ?>" type="checkbox" name="keep[]" value="<?= e($skill) ?>" checked aria-describedby="skills-hint">
-              <label for="skill-<?= $i ?>"><?= e($skill) ?></label>
+              <label for="skill-<?= $i ?>"><?= e(tc($skill)) ?></label>
             </li>
           <?php endforeach; ?>
         </ul>

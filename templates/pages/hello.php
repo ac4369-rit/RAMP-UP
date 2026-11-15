@@ -28,7 +28,7 @@
         <li>
           <strong><?= e($p['name']) ?></strong>
           <small class="meta"><?= e(format_datetime($p['created_at'])) ?></small>
-          <p><?= nl2br(e($p['body'])) ?></p>
+          <p><?= nl2br(e(tc($p['body']))) ?></p>
           <?php if ((int) $p['user_id'] === $me): ?>
             <a href="/hello/<?= (int) $p['id'] ?>/delete"><?= e(t('hello.delete')) ?></a>
           <?php endif; ?>

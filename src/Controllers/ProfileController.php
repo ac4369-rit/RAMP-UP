@@ -73,6 +73,9 @@ class ProfileController extends Controller
             $st = $this->pdo()->prepare('SELECT skill FROM user_skills WHERE user_id = :u ORDER BY skill');
             $st->execute(['u' => $user['id']]);
             $skills = $st->fetchAll(PDO::FETCH_COLUMN);
+            // A–Z by the name the reader sees (skills like "Accessibility" are translated)
+            $collator = new \Collator(\App\Translator::instance()->locale());
+            usort($skills, fn ($a, $b) => $collator->compare(tc($a), tc($b)));
 
             $st = $this->pdo()->prepare('SELECT weekday FROM user_availability WHERE user_id = :u');
             $st->execute(['u' => $user['id']]);
