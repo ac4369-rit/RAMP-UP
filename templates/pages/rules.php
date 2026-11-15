@@ -8,7 +8,7 @@
   <h2><?= e(t('rules.heading')) ?></h2>
   <ol class="list">
     <?php foreach ($rules as $rule): ?>
-      <li><?= e($rule['rule_text']) ?></li>
+      <li><?= e(tc($rule['rule_text'])) ?></li>
     <?php endforeach; ?>
   </ol>
 <?php endif; ?>
